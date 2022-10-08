@@ -89,6 +89,27 @@
         }
       }
     },
+    "/Person/{id}": {
+      "get": {
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/Person/TotalBalance": {
       "get": {
         "tags": [
@@ -136,6 +157,18 @@
           }
         }
       }
+    },
+    "/Transaction/Count": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -160,6 +193,12 @@
         "age": {
           "format": "int32",
           "type": "integer"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
         }
       }
     },
@@ -179,6 +218,12 @@
         "age": {
           "format": "int32",
           "type": "integer"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
         }
       }
     },
@@ -202,12 +247,11 @@
       }
     },
     "TransactionType": {
-      "format": "int32",
       "enum": [
-        0,
-        1
+        "Revenue",
+        "Expense"
       ],
-      "type": "integer"
+      "type": "string"
     }
   }
 }

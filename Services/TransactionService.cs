@@ -7,12 +7,12 @@ using ExpensesManagementApi.Repositories;
 
 namespace ExpensesManagementApi.Services
 {
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         private readonly Repository<Transaction> _repository;
         private readonly Repository<Person> _personRepository;
         private readonly IMapper _mapper;
-        
+
         public TransactionService(Repository<Transaction> repository, Repository<Person> personRepository, IMapper mapper)
         {
             _repository = repository;
@@ -22,8 +22,8 @@ namespace ExpensesManagementApi.Services
 
         public void CreateTransaction(TransactionPostRequest transaction)
         {
-            var person = _personRepository.Query().FirstOrDefault(x =>x.Id == transaction.PersonId);
-            
+            var person = _personRepository.Query().FirstOrDefault(x => x.Id == transaction.PersonId);
+
             if (person == null)
                 throw new NotFoundException(ExceptionMessages.PersonNotFound, transaction.PersonId);
 

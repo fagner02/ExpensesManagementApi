@@ -7,7 +7,7 @@ using ExpensesManagementApi.Repositories;
 
 namespace ExpensesManagementApi.Services
 {
-    public class PersonService
+    public class PersonService : IPersonService
     {
         private readonly Repository<Person> _repository;
         private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace ExpensesManagementApi.Services
         public PersonResponse GetPersonById(int id)
         {
             var result = _repository.Query().FirstOrDefault(x => x.Id == id);
-            
+
             if (result == null)
                 throw new NotFoundException(ExceptionMessages.PersonNotFound, id);
 
@@ -57,7 +57,7 @@ namespace ExpensesManagementApi.Services
 
         public void DeleteRange(PersonDeleteRequest request)
         {
-            var people = _repository.Query().Where(x => request.IdsToDelete.Contains(x.Id));
+            var people = _repository.Query().Where(x => request.IdsToDelete.Contains(x.Id)).ToList();
 
             if (request.IdsToDelete.Count() != people.Count())
                 throw new NotFoundException(ExceptionMessages.PersonNotFound,

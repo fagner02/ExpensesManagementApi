@@ -7,10 +7,10 @@ namespace ExpensesManagementApi.Contexts
 {
     public class Context : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options) { }
+        public Context() { }
 
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Person> People { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Person> People { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

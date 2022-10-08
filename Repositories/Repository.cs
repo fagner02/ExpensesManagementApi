@@ -37,7 +37,7 @@ namespace ExpensesManagementApi.Repositories
             return _context.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes)
+        public virtual IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes)
         {
             var query = includes.Aggregate(_context.Set<TEntity>().AsQueryable(), AddIncludes);
             return query;
