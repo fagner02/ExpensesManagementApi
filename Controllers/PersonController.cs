@@ -23,23 +23,35 @@ namespace ExpensesManagementApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllPersons()
+        public async Task<IActionResult> GetAllPeople()
         {
-            return Ok(await Task.FromResult(_personService.GetAllPersons()));
+            return Ok(await Task.FromResult(_personService.GetAllPeople()));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPersonById([FromRoute] int id)
+        {
+            return Ok(await Task.FromResult(_personService.GetPersonById(id)));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeletePersonsById(PersonDeleteRequest request)
+        public async Task<IActionResult> DeletePeopleById(PersonDeleteRequest request)
         {
             await Task.Run(() => _personService.DeleteRange(request));
             return NoContent();
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdatePersonsById([FromBody]PersonPutRequest request)
+        public async Task<IActionResult> UpdatePeopleById([FromBody] PersonPutRequest request)
         {
-            await Task.Run(() => _personService.UpdateRange(request));
+            await Task.Run(() => _personService.Update(request));
             return Ok();
+        }
+
+        [HttpGet("TotalBalance")]
+        public async Task<IActionResult> GetTotalBalance()
+        {
+            return Ok(await Task.Run(() => _personService.GetTotalBalance()));
         }
     }
 }

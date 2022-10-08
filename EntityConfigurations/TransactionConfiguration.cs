@@ -10,7 +10,7 @@ namespace ExpensesManagementApi.EntityConfigurations
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Type).HasConversion(x => x.ToString(), x => (TransactionType)Enum.Parse(typeof(TransactionType), x));
+            builder.Property(x => x.Type).HasConversion(x => Enum.GetName(typeof(TransactionType), x), x => (TransactionType)Enum.Parse(typeof(TransactionType), x, true));
             builder.HasOne(x => x.Person).WithMany(x => x.Transactions).HasForeignKey(x => x.PersonId).HasPrincipalKey(x => x.Id);
         }
     }

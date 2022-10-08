@@ -2,7 +2,7 @@
 
 namespace ExpensesManagementApi.Models
 {
-    [Table("persons")]
+    [Table("people")]
     public class Person
     {
         [Column("id")]
@@ -13,6 +13,12 @@ namespace ExpensesManagementApi.Models
 
         [Column("age")]
         public int Age { get; set; }
+
+        [Column("phone")]
+        public string? Phone { get; set; }
+
+        [Column("email")]
+        public string? Email { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
     }

@@ -2,7 +2,7 @@
 {
     public enum TransactionType
     {
-        Receita,
-        Despesa
+        Revenue,
+        Expense
     }
 }

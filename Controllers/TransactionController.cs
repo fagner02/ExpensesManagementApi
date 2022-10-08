@@ -27,5 +27,11 @@ namespace ExpensesManagementApi.Controllers
         {
             return Ok(await Task.FromResult(_transactionService.GetAllTransactions()));
         }
+
+        [HttpGet("Count")]
+        public async Task<IActionResult> GetCount()
+        {
+            return Ok(await Task.FromResult(_transactionService.GetTransactionsCount()));
+        }
     }
 }
